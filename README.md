@@ -59,27 +59,28 @@ If you want to specify time, as well, this is what needs to be added:
 Note that the example above would work hitting ClusterIP type service directly (which is quite uncommon), or with Loadbalancer type service, but won't with an Ingress behind NodePort type service.
 This is because with an Ingress, the requests come from many, randomly chosen source IP addresses.
 
-With an ingress, we have to enable using cookies to archieve session affinity.
+With an ingress, we have to enable using cookies to achieve session affinity.
 - [Nginx](https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/)
 - [Traefik](https://docs.traefik.io/configuration/backends/kubernetes/)
 
 ### Auto scaling
-Create several AWS auto scaling group at the beginning:
+Create several AWS auto scaling groups at the beginning:
 - On-demand instance for stateful app (e.g. DB).
-- Approtiated EC2 type of spot instance for stateless app (e.g. t2/t3 for burstable app, m5 for memory intensive app).
+- Spot instance of appropriated EC2 type for stateless app (e.g. t2/t3 for burstable app, m5 for memory intensive app).
 
 ![](https://raw.githubusercontent.com/dogzzdogzz/web-app-architecture/master/aws-auto-scaling.png)
 
 K8S can create/terminate pod with HPA (Horizontal Pod Autoscaler) and create/terminate ec2 instance with CA (Cluster Autoscaler) automatically by monitoring some custom metrics.
 
-Some of metrics can help us to determine if the app need to be scaled out.
+Some of metrics can help us to determine if the app need to be scaled out, for example:
 - CPU usage
 - Memory usage
+- Thread usage
 - Heap
 - Disk IOPS
 - Network bandwidth usage
 - Application Service Quality (e.g. latency)
-- Application Load (e.g. transactions-per-sec, network throughput)
+- Application Load (e.g. transactions-per-sec, requests-per-sec, network throughput)
 - Error rate
 
 ### Health check
