@@ -14,14 +14,14 @@ This picture demostrate two different architecture solutions (serverless and k8s
 ## AWS serverless architecture
 For the apps using AWS serverless architecture, we don't need to take care of too much about load balancing, session handling and so on since everything is managed by AWS. But still need to pay attention on some AWS limit like Lambda concurrency pool and API gateway throttling.
 
-## Kuberetes architecure
+## Kuberetes architecture
 With kubernetes, we also can manage an auto-scalable web app easily.
 
 ### Load Balancer
-k8s exposes the service externally using a cloud provider’s load balancer. Traffic from the external load balancer will be directed at the backend Pods. the AWS Classic Load Balancers that receives the request selects a registered instance or pod using the round robin routing algorithm for TCP listeners and the least outstanding requests routing algorithm for HTTP and HTTPS listeners
+k8s exposes the service externally using a cloud provider’s load balancer. Traffic from the external load balancer will be directed at the backend Pods. the AWS Classic Load Balancers that receives the request selects a registered instance or pod using the round robin routing algorithm for TCP listeners and the least outstanding requests routing algorithm for HTTP and HTTPS listeners.
 
 ### Routing
-K8s ingress controller can redirect the request for each API to specific k8s service/pod
+K8s ingress controller can redirect the request for each API to specific k8s service/pod.
 ![](https://raw.githubusercontent.com/dogzzdogzz/web-app-architecture/master/ingress-controller.jpg)
 
 By using Istio service mesh, we can have more flexibility for traffic routing management like canary deployment.
@@ -59,14 +59,14 @@ If you want to specify time, as well, this is what needs to be added:
 Note that the example above would work hitting ClusterIP type service directly (which is quite uncommon), or with Loadbalancer type service, but won't with an Ingress behind NodePort type service.
 This is because with an Ingress, the requests come from many, randomly chosen source IP addresses.
 
-With an ingress, we have to enable using cookies to archieve session affinity
+With an ingress, we have to enable using cookies to archieve session affinity.
 - [Nginx](https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/)
 - [Traefik](https://docs.traefik.io/configuration/backends/kubernetes/)
 
 ### Auto scaling
 Create several AWS auto scaling group at the beginning:
-- On-demand instance for stateful app (e.g. DB)
-- Approtiated EC2 type of spot instance for stateless app (e.g. t2/t3 for burstable app, m5 for memory intensive app)
+- On-demand instance for stateful app (e.g. DB).
+- Approtiated EC2 type of spot instance for stateless app (e.g. t2/t3 for burstable app, m5 for memory intensive app).
 
 ![](https://raw.githubusercontent.com/dogzzdogzz/web-app-architecture/master/aws-auto-scaling.png)
 
@@ -83,7 +83,7 @@ Some of metrics can help us to determine if the app need to be scaled out.
 - Error rate
 
 ### Health check
-K8s provides the readinessProbe and livenessProbe function to do health check periodically, the pod will be killed and restart a new one if health check failed
+K8s provides the readinessProbe and livenessProbe function to do health check periodically, the pod will be killed and restart a new one if health check failed.
 
 ```yaml
 readinessProbe:
@@ -105,7 +105,7 @@ livenessProbe:
   - Various exporters for metrics collection + alert manager + Grafana for metrics monitoring
   - Prometheus: Data storage, data aggregation, etc.
   - Grafana: Data visualiztion
-  - Alert Manager: Push alert to E-mail, SMS, Slack, etc when hit threshold.
+  - Alert Manager: Push alert to E-mail, SMS, Slack, etc when hit threshold
   
 - Use ELFK stack or cloudwatch for logging
   - Filebeat: Log collection
@@ -115,9 +115,9 @@ livenessProbe:
 
 ### Security Settings
 - EC2 instance security group:
-  - 443, 1025-65535: Allowed for k8s master
-  - 22: Allowed for bastion instance to troubleshoot
-- k8s: only open needed port
+  - 443, 1025-65535: Allowed for k8s master.
+  - 22: Allowed for bastion instance to troubleshoot.
+- k8s: only open needed port.
 ```yaml
 kind: Deployment
 ports:
