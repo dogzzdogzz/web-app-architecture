@@ -22,7 +22,7 @@ k8s exposes the service externally using a cloud provider’s load balancer. Tra
 
 ### Routing
 K8s ingress controller can redirect the request for each API to specific k8s service/pod.
-![](https://raw.githubusercontent.com/dogzzdogzz/web-app-architecture/master/ingress-controller.jpg)
+![](https://raw.githubusercontent.com/dogzzdogzz/web-app-architecture/master/ingress-controller.png)
 
 By using Istio service mesh, we can have more flexibility for traffic routing management like canary deployment.
 ![](https://raw.githubusercontent.com/dogzzdogzz/web-app-architecture/master/istio-TrafficManagementOverview.jpg)
@@ -70,7 +70,7 @@ Create several AWS auto scaling groups at the beginning:
 
 ![](https://raw.githubusercontent.com/dogzzdogzz/web-app-architecture/master/aws-auto-scaling.png)
 
-K8S can create/terminate pod with HPA (Horizontal Pod Autoscaler) and create/terminate ec2 instance with CA (Cluster Autoscaler) automatically by monitoring some custom metrics.
+K8S can create/terminate pod replications with HPA (Horizontal Pod Autoscaler) and create/terminate ec2 instances with CA (Cluster Autoscaler) automatically by monitoring some custom metrics.
 
 Some of metrics can help us to determine if the app need to be scaled out, for example:
 - CPU usage
