@@ -9,7 +9,7 @@ authorName: 'Tony Lee'
 -->
 # web app architecture
 This picture demostrate two different architecture solutions (serverless and k8s) for auto scalable web app.
-![](https://raw.githubusercontent.com/dogzzdogzz/web-app-architecture/master/webapp_architecture.png)
+![](https://raw.githubusercontent.com/dogzzdogzz/web-app-architecture/master/web-app-architecture.png)
 
 ## AWS serverless architecture
 For the apps using AWS serverless architecture, we don't need to take care of too much about load balancing, session handling and so on since everything is managed by AWS. But still need to pay attention on some AWS limit like Lambda concurrency pool and API gateway throttling.
